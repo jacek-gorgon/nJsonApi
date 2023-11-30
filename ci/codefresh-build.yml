@@ -84,7 +84,9 @@ steps:
            - failure
     stage: notify
     image: cfcommunity/slack-notification-resource
-    commands: [ 'echo ${{SLACK_FAILURE}} | /opt/resource/out .' ]
+    commands: 
+     - 'echo ${{SLACK_FAILURE}} | /opt/resource/out .' 
+     - exit 1 
 
   slack-notify-success:
     when:
@@ -107,4 +109,6 @@ steps:
            - success
     stage: notify
     image: cfcommunity/slack-notification-resource
-    commands: [ 'echo ${{SLACK_SUCCESS}} | /opt/resource/out .' ]
+    commands: 
+     - 'echo ${{SLACK_SUCCESS}} | /opt/resource/out .' 
+     - exit 0 
