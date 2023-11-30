@@ -5,6 +5,13 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 as build
 
 WORKDIR /build
 
+# The following arguments are set locally
+ARG primaryBuildDirectory=./Util-JsonApiSerializer.Common.NetCore
+ARG primaryLinkedCodeDirectory=./Util-JsonApiSerializer.Common
+ARG primaryProjectName=Util-JsonApiSerializer.Common.NetCore.csproj
+ARG primaryCoreProject=$primaryBuildDirectory/$primaryProjectName
+
+
 
 
 
@@ -13,37 +20,10 @@ ARG releaseType=ReleaseCore
 #The following arguments are passed in from the build script
 ARG branchName=master
 
-
-
-# The following arguments are set locally
-ARG primaryBuildDirectory=./Util-JsonApiSerializer.Common.NetCore
-ARG primaryLinkedCodeDirectory=./Util-JsonApiSerializer
-ARG primaryProjectName=Util-JsonApiSerializer.Common.NetCore.csproj
-ARG primaryCoreProject=$primaryBuildDirectory/$primaryProjectName
-
 # Copy the project File and code
 COPY $primaryBuildDirectory $primaryBuildDirectory
 # because there are linked files we need to copy these as well
 COPY $primaryLinkedCodeDirectory $primaryLinkedCodeDirectory
-
-
-#####################
-# do this for secondary project Consul
-#####################
-ARG secondaryBuildDirectory=./source/FL.ServiceDiscovery.Consul.NetCore
-ARG secondaryLinkedCodeDirectory=./source/FL.ServiceDiscovery.Consul
-ARG secondaryProjectName=FL.ServiceDiscovery.Consul.NetCore.csproj
-ARG secondaryCoreProject=$secondaryBuildDirectory/$secondaryProjectName
-
-
-
-# Copy the project File and code
-COPY $secondaryBuildDirectory $secondaryBuildDirectory
-# because there are linked files we need to copy these as well
-COPY $secondaryLinkedCodeDirectory $secondaryLinkedCodeDirectory
-
-
-
 
 #Log the branch name
 Run echo "Branch name is $branchName"
@@ -55,19 +35,10 @@ Run echo "Branch name is $branchName"
 ARG nugetconfig=NuGet.config
 ADD $nugetconfig NuGet.config
 
-# Restore the packages w/ the appropriate NuGet.config
-RUN dotnet restore "$secondaryCoreProject"
-
-
-
-# build without a restore
-Run dotnet build "$secondaryCoreProject" -c $releaseType --no-restore
-
-
-
 
 # Restore the packages w/ the appropriate NuGet.config
 RUN dotnet restore "$primaryCoreProject"
+
 
 # build without a restore
 
@@ -75,6 +46,28 @@ RUN dotnet build "$primaryCoreProject" -c $releaseType --no-restore
 
 
 
+#####################
+# do this for secondary project
+#####################
+ARG secondaryBuildDirectory=./Util-JsonApiSerializer.NetCore
+ARG secondaryLinkedCodeDirectory=./Util-JsonApiSerializer
+ARG secondaryProjectName=Util-JsonApiSerializer.NetCore.csproj
+ARG secondaryCoreProject=$secondaryBuildDirectory/$secondaryProjectName
+
+
+
+# Copy the project File and code
+COPY $secondaryBuildDirectory $secondaryBuildDirectory
+# because there are linked files we need to copy these as well
+COPY $secondaryLinkedCodeDirectory $secondaryLinkedCodeDirectory
+
+
+# Restore the packages w/ the appropriate NuGet.config
+RUN dotnet restore "$secondaryCoreProject"
+
+
+# build without a restore
+Run dotnet build "$secondaryCoreProject" -c $releaseType --no-restore
 
 # Always delete the NuGet.config file, no matter where it came from.
 # This prevents it from appearing in the runtime stage build, thus
@@ -86,7 +79,7 @@ RUN rm -f NuGet.config
 ARG nugetVersion
 RUN dotnet pack  "$primaryCoreProject" --output ./nupkgs /p:Version=$nugetVersion -c $releaseType --no-build --no-restore; 
 
-##Pack Secondary
+#Pack Secondary
 RUN dotnet pack  "$secondaryCoreProject" --output ./nupkgs /p:Version=$nugetVersion -c $releaseType --no-build --no-restore;
 
 
