@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,16 +8,17 @@
     <Configurations>Debug;Release;ReleaseCore</Configurations>
     <ApplicationIcon>FrontlineCentralIcon.ico</ApplicationIcon>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Title>UtilJsonApiSerializer Net Core</Title>
+    <Title>FrontlineCentral.UtilJsonApiSerializer.NetCore</Title>
     <PackageId>UtilJsonApiSerializerNetCore</PackageId>
     <Authors>Frontline Central</Authors>
-    <Company>Prontline Education</Company>
+    <Company>Frontline Education</Company>
     <Description>The Json API Serializer utility for Net Core</Description>
-    <Copyright>copyright (c) Frontline Education  2023</Copyright>
+    <Copyright>Copyright (c) Frontline Education  2024</Copyright>
     <PackageIcon>FrontlineCentralIcon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/FrontlineEducation/Util-JsonApiSerializer</RepositoryUrl>
     <PackageTags>util;jsonapi;serializer;jsonapiserializer;netcore;net;core;</PackageTags>
+    <Product>$(Title)</Product>
   </PropertyGroup>
 
   <ItemGroup>
