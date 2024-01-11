@@ -7,12 +7,12 @@
     <Nullable>enable</Nullable>
     <Configurations>Debug;Release;ReleaseCore</Configurations>
     <ApplicationIcon>FrontlineCentralIcon.ico</ApplicationIcon>
-    <Title>UtilJsonApiSerializerCommonNetCore</Title>
+    <Title>FrontlineCentral.UtilJsonApiSerializer.Common.NetCore</Title>
     <Authors>Frontline Central</Authors>
     <Company>Frontline Education</Company>
-    <Product>UtilJsonApiSerializerCommonNetCore</Product>
+    <Product>$(Title)</Product>
     <Description>Net Core version of the JsonApiSerializer Common library</Description>
-    <Copyright>copyright (c) Frontline Education 2023</Copyright>
+    <Copyright>Copyright (c) Frontline Education 2024</Copyright>
     <PackageIcon>FrontlineCentralIcon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/FrontlineEducation/Util-JsonApiSerializer</RepositoryUrl>
