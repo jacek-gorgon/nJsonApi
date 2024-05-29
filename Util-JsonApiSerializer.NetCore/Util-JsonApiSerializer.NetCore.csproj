@@ -42,7 +42,6 @@
     <Compile Include="..\Util-JsonApiSerializer\IResourceConfigurationBuilder.cs" Link="IResourceConfigurationBuilder.cs" />
     <Compile Include="..\Util-JsonApiSerializer\IResourceMapping.cs" Link="IResourceMapping.cs" />
     <Compile Include="..\Util-JsonApiSerializer\ISerializerPipelineModule.cs" Link="ISerializerPipelineModule.cs" />
-    <Compile Include="..\Util-JsonApiSerializer\JsonApiSerializer.cs" Link="JsonApiSerializer.cs" />
     <Compile Include="..\Util-JsonApiSerializer\LinkMapping.cs" Link="LinkMapping.cs" />
     <Compile Include="..\Util-JsonApiSerializer\ResourceConfigurationBuilder.cs" Link="ResourceConfigurationBuilder.cs" />
     <Compile Include="..\Util-JsonApiSerializer\ResourceMapping.cs" Link="ResourceMapping.cs" />
