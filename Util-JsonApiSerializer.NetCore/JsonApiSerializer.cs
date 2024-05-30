@@ -26,6 +26,16 @@ namespace UtilJsonApiSerializer
             _accessor = accessor;
         }
 
+        public JsonApiSerializer(IHttpContextAccessor accessor, string routePrefix)
+        {
+            SerializerConfiguration = new ConfigurationBuilder();
+            _routePrefix = string.IsNullOrEmpty(routePrefix) ? "" : routePrefix;
+            _accessor = accessor;
+        }
+
+
+
+
         public object SerializeObject(ConfigurationBuilder serializerConfig, object obj)
         {
             var config = serializerConfig.Build();
